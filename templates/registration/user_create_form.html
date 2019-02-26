@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    Create Account
+    <form method="post" action="{% url 'profiles:user_create'%}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="submit">
+        <input type="reset" value="reset">
+    </form>
+{% endblock %}

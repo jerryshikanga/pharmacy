@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>
+        <a href="{% url 'prescriptions:prescription_create' %}">Create Prescription</a>
+    </p>
+    <p>
+        {% for prescription in prescription_list %}
+            {{ prescription }}
+        {% endfor %}
+    </p>
+{% endblock %}

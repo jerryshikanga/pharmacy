@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    This is the index page.
+    <p>
+        <a href="{% url 'patients:list_view' %}">Patients</a>
+    </p>
+    <p>
+        <a href="{% url 'medicine:medicine_list' %}">Medicine</a>
+    </p>
+    <p>
+        <a href="{% url 'prescriptions:prescription_list' %}">Prescriptions</a>
+    </p>
+{% endblock %}

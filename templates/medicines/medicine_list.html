@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>
+        <a href="{% url 'medicine:medicine_create' %}">Create Medicine</a>
+    </p>
+    <p>
+        {% for medicine in medicine_list %}
+            {{ medicine }}
+        {% endfor %}
+    </p>
+{% endblock %}
