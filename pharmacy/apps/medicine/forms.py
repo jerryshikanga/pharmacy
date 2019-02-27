@@ -24,3 +24,20 @@ class MedicineForm(forms.ModelForm):
         if expiry_date <= timezone.now().date():
             raise ValidationError("Product cannot be already expired.")
         return expiry_date
+
+    def clean_maximum_units(self):
+        maximum_units = self.cleaned_data["maximum_units"]
+        minimum_units = self.cleaned_data["minimum_units"]
+        if minimum_units > maximum_units:
+            raise ValidationError("Maximum units is less then minimum units")
+        return maximum_units
+
+    def clean_advisable_units(self):
+        maximum_units = self.cleaned_data["maximum_units"]
+        minimum_units = self.cleaned_data["minimum_units"]
+        advisable_units = self.cleaned_data["advisable_units"]
+        if advisable_units > maximum_units:
+            raise ValidationError("Advisable units cannot be greater than maximum units.")
+        if advisable_units < minimum_units:
+            raise ValidationError("Advisable units cannot be less than minimum units.")
+        return advisable_units

@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+PROJECT_DIR = os.path.join(BASE_DIR, "..")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -43,10 +44,12 @@ INSTALLED_APPS = [
     'djchoices',
     'rest_framework',
     'rest_framework.authtoken',
+    'widget_tweaks',
 
     'pharmacy.apps.patients.apps.PatientsConfig',
     'pharmacy.apps.medicine.apps.MedicineConfig',
-    'pharmacy.apps.prescriptions.apps.PrescriptionsConfig'
+    'pharmacy.apps.prescriptions.apps.PrescriptionsConfig',
+    'pharmacy.apps.profiles.apps.ProfilesConfig'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pharmacy.utils.context_processors.get_context',
             ],
         },
     },
@@ -129,6 +133,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
+MEDIA_URL = '/static/media/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -140,3 +151,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+LOGIN_REDIRECT_URL = reverse_lazy("profiles:profile")
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
