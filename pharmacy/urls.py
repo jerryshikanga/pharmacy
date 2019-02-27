@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 from pharmacy import views as pharmacy_views
 
 urlpatterns = [
@@ -23,6 +24,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('patients/', include('pharmacy.apps.patients.urls')),
     path('medicine/', include('pharmacy.apps.medicine.urls')),
-    path('profiles/', include('pharmacy.apps.profiles.urls')),
+    path('accounts/', include('pharmacy.apps.profiles.urls')),
     path('prescriptions/', include('pharmacy.apps.prescriptions.urls'))
 ]
+# if settings.DEBUG:
+#         urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

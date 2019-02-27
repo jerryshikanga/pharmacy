@@ -1,9 +1,10 @@
 from django.db import models
 from djchoices import ChoiceItem, DjangoChoices
+from django_extensions.db.models import TimeStampedModel
 
 
 # Create your models here.
-class Medicine(models.Model):
+class Medicine(TimeStampedModel):
     class MedicineUnits(DjangoChoices):
         mg = ChoiceItem("mg")
         ml = ChoiceItem("ml")
